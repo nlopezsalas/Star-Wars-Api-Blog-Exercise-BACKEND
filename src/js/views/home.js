@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	const imageUrls = [
+	const imagePeopleUrls = [
 		"https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_7ffe21c7.jpeg?region=130%2C147%2C1417%2C796",
 		"https://lumiere-a.akamaihd.net/v1/images/c-3po-main_d6850e28.jpeg?region=176%2C0%2C951%2C536",
 		"https://lumiere-a.akamaihd.net/v1/images/r2-d2-main_f315b094.jpeg?region=273%2C0%2C951%2C536",
@@ -23,23 +23,57 @@ export const Home = () => {
 
 	];
 
-	useEffect(() => { actions.getPeople(), actions.getDetails() }, [])
+	const imagePlanetsUrls = [
+		"https://lumiere-a.akamaihd.net/v1/images/tatooine-main_9542b896.jpeg?region=165%2C0%2C949%2C534",
+		"https://lumiere-a.akamaihd.net/v1/images/alderaan-main_f5b676cf.jpeg?region=0%2C0%2C1280%2C720",
+		"https://lumiere-a.akamaihd.net/v1/images/databank_yavin4_01_169_b6945e20.jpeg?region=0%2C0%2C1560%2C878",
+		"https://lumiere-a.akamaihd.net/v1/images/Hoth_d074d307.jpeg?region=0%2C0%2C1200%2C675",
+		"https://lumiere-a.akamaihd.net/v1/images/Dagobah_890df592.jpeg?region=0%2C80%2C1260%2C711",
+		"https://lumiere-a.akamaihd.net/v1/images/databank_cloudcity_01_169_e589ba2c.jpeg?region=0%2C0%2C1560%2C878",
+		"https://lumiere-a.akamaihd.net/v1/images/databank_endor_01_169_68ba9bdc.jpeg?region=0%2C0%2C1560%2C878",
+		"https://lumiere-a.akamaihd.net/v1/images/databank_naboo_01_169_6cd7e1e0.jpeg?region=0%2C0%2C1560%2C878",
+		"https://lumiere-a.akamaihd.net/v1/images/coruscant-main_59b865a4.jpeg?region=164%2C0%2C953%2C536",
+		"https://lumiere-a.akamaihd.net/v1/images/kamino-main_3001369e.jpeg?region=158%2C0%2C964%2C542",
+	];
+
+
+	const imageStarshipsUrls = [
+		"https://lumiere-a.akamaihd.net/v1/images/hammerhead-corvette-rogue-update_453ce60b.jpeg?region=154%2C0%2C892%2C502",
+		"https://lumiere-a.akamaihd.net/v1/images/Star-Destroyer_ab6b94bb.jpeg?region=0%2C0%2C1600%2C900",
+		"https://lumiere-a.akamaihd.net/v1/images/mobile-tac-pod-main_933a2b48.jpeg?region=383%2C40%2C1167%2C657",
+		"https://lumiere-a.akamaihd.net/v1/images/Death-Star-I-copy_36ad2500.jpeg?region=0%2C0%2C1600%2C900",
+		"https://lumiere-a.akamaihd.net/v1/images/Y-Wing-Fighter_0e78c9ae.jpeg?region=0%2C0%2C1536%2C864",
+		"https://lumiere-a.akamaihd.net/v1/images/millennium-falcon-main-tlj-a_7cf89d3a.jpeg?region=0%2C0%2C1280%2C720",
+		"https://lumiere-a.akamaihd.net/v1/images/image_3aaf40b1.jpeg?region=0%2C0%2C1920%2C1080",
+		"https://lumiere-a.akamaihd.net/v1/images/databank_executor_01_169_8157df82.jpeg?region=57%2C0%2C1503%2C845",
+		"https://lumiere-a.akamaihd.net/v1/images/resistance-x-wing_9433981f.jpeg?region=0%2C0%2C1560%2C878",
+		"https://lumiere-a.akamaihd.net/v1/images/ep8-ff-004996_8ab70142.jpeg?region=0%2C0%2C1280%2C720",
+	];
+
+
+
+
+	useEffect(() => { actions.getPeople(), actions.getPeopleDetails(), actions.getPlanets(), actions.getPlanetsDetails(), actions.getStarships(), actions.getStarshipsDetails() }, [])
 
 	console.log(store.people);
 	console.log(store.peopleDetails);
-
+	console.log(store.planets);
+	console.log(store.planetsDetails);
+	console.log(store.starships);
+	console.log(store.starshipsDetails);
 
 
 	return (
 
 		<>
+			<br />
 			<h1 className="container container-title">Characters</h1>
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
 						<div key={index} className="col-md-4 me-3">
 							<div className="card">
-								<img src={imageUrls[index % imageUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
+								<img src={imagePeopleUrls[index % imagePeopleUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
 								<div className="card-body">
 									<h5 className="card-title">{item.name}</h5>
 
@@ -51,9 +85,75 @@ export const Home = () => {
 										</div>
 									)}
 									<Link to="/details">
-									<a className="btn btn-primary mt-2" >
-										Learn More!
-									</a>
+										<a className="btn btn-primary mt-2" >
+											Learn More!
+										</a>
+									</Link>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+
+
+			<br />
+			<br />
+			<h1 className="container container-title">Planets</h1>
+			<div className="container mt-5 container-cards">
+				<div className="d-flex flex-nowrap">
+					{store.planets.map((item, index) => (
+						<div key={index} className="col-md-4 me-3">
+							<div className="card">
+								<img src={imagePlanetsUrls[index % imagePlanetsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
+								<div className="card-body">
+									<h5 className="card-title">{item.name}</h5>
+
+									{store.planetsDetails[index] && store.planetsDetails[index].result && store.planetsDetails[index].result.properties && (
+										<div>
+											<p className="card-text">Diameter: {store.planetsDetails[index].result.properties.diameter}</p>
+											<p className="card-text">Population: {store.planetsDetails[index].result.properties.population}</p>
+											<p className="card-text">Climate: {store.planetsDetails[index].result.properties.climate}</p>
+										</div>
+									)}
+									<Link to="/details">
+										<a className="btn btn-primary mt-2" >
+											Learn More!
+										</a>
+									</Link>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+
+
+			<br />
+			<br />
+			<h1 className="container container-title">Starships</h1>
+			<div className="container mt-5 container-cards">
+				<div className="d-flex flex-nowrap">
+					{store.starships.map((item, index) => (
+						<div key={index} className="col-md-4 me-3">
+							<div className="card">
+								<img src={imageStarshipsUrls[index % imageStarshipsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
+								<div className="card-body">
+									<h5 className="card-title">{item.name}</h5>
+
+									{store.starshipsDetails[index] && store.starshipsDetails[index].result && store.starshipsDetails[index].result.properties && (
+										<div>
+											<p className="card-text">Cost: {store.starshipsDetails[index].result.properties.cost_in_credits}</p>
+											<p className="card-text">Manufacturer: {store.starshipsDetails[index].result.properties.manufacturer}</p>
+											<p className="card-text">Passengers: {store.starshipsDetails[index].result.properties.passengers}</p>
+										</div>
+									)}
+									<Link to="/details">
+										<a className="btn btn-primary mt-2" >
+											Learn More!
+										</a>
 									</Link>
 								</div>
 							</div>
