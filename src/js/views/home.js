@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 
 
@@ -19,29 +20,41 @@ export const Home = () => {
 		"https://lumiere-a.akamaihd.net/v1/images/r5-d4_main_image_7d5f078e.jpeg?region=374%2C0%2C1186%2C666",
 		"https://lumiere-a.akamaihd.net/v1/images/image_606ff7f7.jpeg?region=0%2C0%2C1560%2C878",
 		"https://lumiere-a.akamaihd.net/v1/images/obi-wan-kenobi-main_3286c63c.jpeg?region=0%2C0%2C1280%2C721",
-		
+
 	];
 
-	useEffect(() => { actions.getPeople() }, [])
+	useEffect(() => { actions.getPeople(), actions.getDetails() }, [])
 
 	console.log(store.people);
+	console.log(store.peopleDetails);
+
 
 
 	return (
 
 		<>
-			<div className="container mt-5 overflow-scroll">
+			<h1 className="container container-title">Characters</h1>
+			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
-						<div key={index} className="col-md-4">
+						<div key={index} className="col-md-4 me-3">
 							<div className="card">
-								<img src={imageUrls[index % imageUrls.length]} style={{ objectFit: "cover", width: "400px", height: "200px",}} className="card-img-top" alt="..." />
+								<img src={imageUrls[index % imageUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
 								<div className="card-body">
 									<h5 className="card-title">{item.name}</h5>
-									<p className="card-text">{item.uid}</p>
-									<a href="#" className="btn btn-primary">
-										Go somewhere
+
+									{store.peopleDetails[index] && store.peopleDetails[index].result && store.peopleDetails[index].result.properties && (
+										<div>
+											<p className="card-text">Height {store.peopleDetails[index].result.properties.height}</p>
+											<p className="card-text">Mass: {store.peopleDetails[index].result.properties.mass}</p>
+											<p className="card-text">Gender: {store.peopleDetails[index].result.properties.gender}</p>
+										</div>
+									)}
+									<Link to="/details">
+									<a className="btn btn-primary mt-2" >
+										Learn More!
 									</a>
+									</Link>
 								</div>
 							</div>
 						</div>

@@ -1,0 +1,42 @@
+body {
+    background-color: rgb(40, 39, 39);
+}
+
+.container-title{
+    color: brown;
+}
+
+.card{
+    background-color: rgba(255, 228, 196, 0.381);
+}
+
+.card-title {
+
+    border-top: 1px solid #000; 
+     border-bottom: 1px solid #000;
+    padding: 10px; 
+}
+
+.container-cards {
+    overflow-x: auto; 
+    overflow-y: hidden;
+    max-height: auto; 
+    scrollbar-width: thin; 
+    scrollbar-color: #ccc #f4f4f4; 
+    padding-bottom: 15px;
+  }
+  
+  .container-cards::-webkit-scrollbar {
+    width: 10px; 
+  }
+  
+  .container-cards::-webkit-scrollbar-thumb {
+    background-color: #ccc; 
+    border-radius: 5px; 
+  }
+  
+  .container-cards::-webkit-scrollbar-track {
+    background-color: #f4f4f4; 
+  }
+
+  
