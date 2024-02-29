@@ -42,25 +42,33 @@ export const Home = () => {
 		"https://lumiere-a.akamaihd.net/v1/images/Star-Destroyer_ab6b94bb.jpeg?region=0%2C0%2C1600%2C900",
 		"https://lumiere-a.akamaihd.net/v1/images/mobile-tac-pod-main_933a2b48.jpeg?region=383%2C40%2C1167%2C657",
 		"https://lumiere-a.akamaihd.net/v1/images/Death-Star-I-copy_36ad2500.jpeg?region=0%2C0%2C1600%2C900",
-		"https://lumiere-a.akamaihd.net/v1/images/Y-Wing-Fighter_0e78c9ae.jpeg?region=0%2C0%2C1536%2C864",
 		"https://lumiere-a.akamaihd.net/v1/images/millennium-falcon-main-tlj-a_7cf89d3a.jpeg?region=0%2C0%2C1280%2C720",
+		"https://lumiere-a.akamaihd.net/v1/images/Y-Wing-Fighter_0e78c9ae.jpeg?region=0%2C0%2C1536%2C864",
+		"https://lumiere-a.akamaihd.net/v1/images/resistance-x-wing_9433981f.jpeg?region=0%2C0%2C1560%2C878",
 		"https://lumiere-a.akamaihd.net/v1/images/image_3aaf40b1.jpeg?region=0%2C0%2C1920%2C1080",
 		"https://lumiere-a.akamaihd.net/v1/images/databank_executor_01_169_8157df82.jpeg?region=57%2C0%2C1503%2C845",
-		"https://lumiere-a.akamaihd.net/v1/images/resistance-x-wing_9433981f.jpeg?region=0%2C0%2C1560%2C878",
-		"https://lumiere-a.akamaihd.net/v1/images/ep8-ff-004996_8ab70142.jpeg?region=0%2C0%2C1280%2C720",
+		"https://lumiere-a.akamaihd.net/v1/images/gr-75-medium-transport_cd04862d.jpeg?region=15%2C0%2C770%2C433",
 	];
 
+	const [selectedId, setSelectedId] = useState(null);
+
+	// Por ejemplo, en tu componente Home.js
+	const handleClick = (characterId) => {
+		const selectedCharacter = actions.selectCharacterById(store, characterId);
+		// Resto del código
+	};
 
 
 
-	useEffect(() => { actions.getPeople(), actions.getPeopleDetails(), actions.getPlanets(), actions.getPlanetsDetails(), actions.getStarships(), actions.getStarshipsDetails() }, [])
+
+	useEffect(() => { actions.getPeople(), actions.getPlanets(), actions.getStarships() }, [])
 
 	console.log(store.people);
-	console.log(store.peopleDetails);
+	// console.log(store.peopleDetails);
 	console.log(store.planets);
-	console.log(store.planetsDetails);
+	// console.log(store.planetsDetails);
 	console.log(store.starships);
-	console.log(store.starshipsDetails);
+	// console.log(store.starshipsDetails);
 
 
 	return (
@@ -75,17 +83,17 @@ export const Home = () => {
 							<div className="card">
 								<img src={imagePeopleUrls[index % imagePeopleUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
 								<div className="card-body">
-									<h5 className="card-title">{item.name}</h5>
+									<h5 className="card-title">{item.result.properties.name}</h5>
 
-									{store.peopleDetails[index] && store.peopleDetails[index].result && store.peopleDetails[index].result.properties && (
+									{store.people[index] && store.people[index].result && store.people[index].result.properties && (
 										<div>
-											<p className="card-text">Height {store.peopleDetails[index].result.properties.height}</p>
-											<p className="card-text">Mass: {store.peopleDetails[index].result.properties.mass}</p>
-											<p className="card-text">Gender: {store.peopleDetails[index].result.properties.gender}</p>
+											<p className="card-text">Height {store.people[index].result.properties.height}</p>
+											<p className="card-text">Mass: {store.people[index].result.properties.mass}</p>
+											<p className="card-text">Gender: {store.people[index].result.properties.gender}</p>
 										</div>
 									)}
-									<Link to="/details">
-										<a className="btn btn-primary mt-2" >
+									<Link to={`/details/${item.result.uid}`}>
+										<a className="btn btn-primary mt-2" onClick={() => handleClick(item.uid)}>
 											Learn More!
 										</a>
 									</Link>
@@ -108,13 +116,13 @@ export const Home = () => {
 							<div className="card">
 								<img src={imagePlanetsUrls[index % imagePlanetsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
 								<div className="card-body">
-									<h5 className="card-title">{item.name}</h5>
+									<h5 className="card-title">{item.result.properties.name}</h5>
 
-									{store.planetsDetails[index] && store.planetsDetails[index].result && store.planetsDetails[index].result.properties && (
+									{store.planets[index] && store.planets[index].result && store.planets[index].result.properties && (
 										<div>
-											<p className="card-text">Diameter: {store.planetsDetails[index].result.properties.diameter}</p>
-											<p className="card-text">Population: {store.planetsDetails[index].result.properties.population}</p>
-											<p className="card-text">Climate: {store.planetsDetails[index].result.properties.climate}</p>
+											<p className="card-text">Diameter: {store.planets[index].result.properties.diameter}</p>
+											<p className="card-text">Population: {store.planets[index].result.properties.population}</p>
+											<p className="card-text">Climate: {store.planets[index].result.properties.climate}</p>
 										</div>
 									)}
 									<Link to="/details">
@@ -141,13 +149,13 @@ export const Home = () => {
 							<div className="card">
 								<img src={imageStarshipsUrls[index % imageStarshipsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
 								<div className="card-body">
-									<h5 className="card-title">{item.name}</h5>
+									<h5 className="card-title">{item.result.properties.name}</h5>
 
-									{store.starshipsDetails[index] && store.starshipsDetails[index].result && store.starshipsDetails[index].result.properties && (
+									{store.starships[index] && store.starships[index].result && store.starships[index].result.properties && (
 										<div>
-											<p className="card-text">Cost: {store.starshipsDetails[index].result.properties.cost_in_credits}</p>
-											<p className="card-text">Manufacturer: {store.starshipsDetails[index].result.properties.manufacturer}</p>
-											<p className="card-text">Passengers: {store.starshipsDetails[index].result.properties.passengers}</p>
+											<p className="card-text">Cost: {store.starships[index].result.properties.cost_in_credits}</p>
+											<p className="card-text">Manufacturer: {store.starships[index].result.properties.manufacturer}</p>
+											<p className="card-text">Passengers: {store.starships[index].result.properties.passengers}</p>
 										</div>
 									)}
 									<Link to="/details">
