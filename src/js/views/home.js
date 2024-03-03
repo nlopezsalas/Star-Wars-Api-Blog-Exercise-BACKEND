@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
+import { People } from "./people";
+// import { Planets } from "./planetscomp";
+// import { Starships } from "./starshipscomp";
 
 
 
@@ -50,62 +52,64 @@ export const Home = () => {
 		"https://lumiere-a.akamaihd.net/v1/images/gr-75-medium-transport_cd04862d.jpeg?region=15%2C0%2C770%2C433",
 	];
 
-	const [selectedId, setSelectedId] = useState(null);
+	// const [selectedId, setSelectedId] = useState(null);
 
-	// Por ejemplo, en tu componente Home.js
-	const handleClick = (characterId) => {
-		const selectedCharacter = actions.selectCharacterById(store, characterId);
-		// Resto del código
-	};
+	// const selectCharacterById = (store, characterId) => {
+	// 	return store.people.find(item => item.result && item.result.uid === characterId);
+	// };
 
 
+	// const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+
+	// // Por ejemplo, en tu componente Home.js
+	// const handleClick = (characterId, index) => {
+	// 	const selectedCharacter = selectCharacterById(store, characterId);
+	// 	const imageUrl = imagePeopleUrls[index % imagePeopleUrls.length];
+
+	// 	// Resto del código para navegar a la página de detalles
+	// 	setSelectedImageUrl(imageUrl);
+	// 	history.push(`/details/${item.result.uid}`);
+	// };
 
 
-	useEffect(() => { actions.getPeople(), actions.getPlanets(), actions.getStarships() }, [])
 
-	console.log(store.people);
+
+	// useEffect(() => { actions.getPeople() }, [])
+
+	// actions.getPlanets(), actions.getStarships() 
+
+	// console.log(store.people);
 	// console.log(store.peopleDetails);
-	console.log(store.planets);
+	// console.log(store.planets);
 	// console.log(store.planetsDetails);
-	console.log(store.starships);
+	// console.log(store.starships);
 	// console.log(store.starshipsDetails);
+	// console.log("Selected Image URL:", selectedImageUrl);
+
+	// function addNewFavorite () {
+	// 	actions.addFavorites(getStore.people.name);
+	// };
 
 
 	return (
 
-		<>
-			<br />
-			<h1 className="container container-title">Characters</h1>
-			<div className="container mt-5 container-cards">
-				<div className="d-flex flex-nowrap">
-					{store.people.map((item, index) => (
-						<div key={index} className="col-md-4 me-3">
-							<div className="card">
-								<img src={imagePeopleUrls[index % imagePeopleUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">{item.result.properties.name}</h5>
-
-									{store.people[index] && store.people[index].result && store.people[index].result.properties && (
-										<div>
-											<p className="card-text">Height {store.people[index].result.properties.height}</p>
-											<p className="card-text">Mass: {store.people[index].result.properties.mass}</p>
-											<p className="card-text">Gender: {store.people[index].result.properties.gender}</p>
-										</div>
-									)}
-									<Link to={`/details/${item.result.uid}`}>
-										<a className="btn btn-primary mt-2" onClick={() => handleClick(item.uid)}>
-											Learn More!
-										</a>
-									</Link>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
+		(
+			<div className="base container-fluid bg-dark">
+				<People />
+				{/* <h2 className="text-danger ms-4">Planets</h2>
+				<PlanetsComp/>
+				<h2 className="text-danger ms-4">Starships</h2>
+				<StarshipsComp/> */}
 			</div>
+		)
+	)};
 
 
+		
+		
 
+
+			{/* 
 			<br />
 			<br />
 			<h1 className="container container-title">Planets</h1>
@@ -168,13 +172,10 @@ export const Home = () => {
 						</div>
 					))}
 				</div>
-			</div>
-		</>
-
-	)
+			</div> */}
+		
 
 
-};
 
 
 

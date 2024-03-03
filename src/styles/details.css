@@ -1,0 +1,7 @@
+.card-text-description {
+    font-size: 16px;
+}
+
+.card-img, .card-img-bottom, .card-img-top {
+    width: 100%;
+    height: -webkit-fill-available;}
