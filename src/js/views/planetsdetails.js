@@ -43,7 +43,7 @@ export const PlanetsDetails = () => {
   }
 
  
-  console.log("store.planets", store.planets);
+
   console.log("planetsID:", planetsID);
   console.log("Selected Planet:", selectedPlanet);
 

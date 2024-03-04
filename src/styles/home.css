@@ -1,13 +1,15 @@
 @import url('https://fonts.cdnfonts.com/css/star-wars');
 
 body {
- background: #132430;
- background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
+  background: #132430;
+  background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
 } 
+
 
 .container-title{
     color: brown;
 }
+
 
 .card{
     background-image: 
@@ -15,17 +17,16 @@ body {
     linear-gradient(to right, #615302, #645816, #b3a31699, #615302);
     background-size: 200% 100%; 
     animation: moveBackground 20s linear infinite;
-
-
 }
+
 
 .base {
   background-repeat: no-repeat;
   background-size: auto;
 }
 
-.card-title {
 
+.card-title {
     border-top: 1px solid #2020207d; 
     border-bottom: 1px solid #2020207d;
     padding: 10px; 
@@ -35,28 +36,31 @@ body {
     font-weight:bold;
 }
 
+
 .container-cards {
     overflow-x: auto; 
     overflow-y: hidden;
     max-height: auto; 
     scrollbar-width: thin; 
     scrollbar-color: #ccc #f4f4f4; 
-    padding-bottom: 15px;
-      
-  }
-  
+    padding-bottom: 15px;  
+}
+
+
 .container-cards::-webkit-scrollbar {
     width: 10px; 
-  }
-  
+}
+
+
 .container-cards::-webkit-scrollbar-thumb {
     background-color: #ccc; 
     border-radius: 5px; 
-  }
+}
   
 .container-cards::-webkit-scrollbar-track {
     background-color: #f4f4f4; 
-  }
+}
+
 
 .text-gradient {
     color: transparent;
@@ -72,9 +76,9 @@ body {
     -webkit-text-stroke-width: 0px;
     -webkit-text-stroke-color: #0a0a0a;
        
-  }
+}
 
-  .btn-secondary {
+.btn-secondary {
     color: #eaebe8;
     background-color: #7c878f;
     border-color: #b9b9b9;

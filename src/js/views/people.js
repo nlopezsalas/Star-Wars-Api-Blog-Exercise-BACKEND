@@ -26,7 +26,6 @@ export const People = () => {
 
 	console.log(store.people);
 
-
 	return (
 
 		<>

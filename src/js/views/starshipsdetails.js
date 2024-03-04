@@ -43,7 +43,6 @@ export const StarshipsDetails = () => {
   }
 
  
-  console.log("store.planets", store.starships);
   console.log("starshipsID:", starshipsID);
   console.log("Selected Planet:", selectedStarships);
 

@@ -40,7 +40,6 @@ export const PeopleDetails = () => {
   }
 
  
-  console.log("store.people:", store.people);
   console.log("characterId:", characterId);
   console.log("Selected Character:", selectedCharacter);
 
