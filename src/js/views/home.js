@@ -3,6 +3,7 @@ import "../../styles/home.css";
 import { Context } from "../store/appContext";
 import { Link, } from "react-router-dom";
 import { People } from "./people";
+import hiperespacio from "/src/img/hiperespacio.jpg";
 // import { Planets } from "./planetscomp";
 // import { Starships } from "./starshipscomp";
 
@@ -89,12 +90,12 @@ export const Home = () => {
 	// function addNewFavorite () {
 	// 	actions.addFavorites(getStore.people.name);
 	// };
-
+	
 
 	return (
 
 		(
-			<div className="base container-fluid bg-dark">
+			<div className="base container-fluid" >
 				<People />
 				{/* <h2 className="text-danger ms-4">Planets</h2>
 				<PlanetsComp/>
@@ -102,14 +103,15 @@ export const Home = () => {
 				<StarshipsComp/> */}
 			</div>
 		)
-	)};
+	)
+};
 
 
-		
-		
 
 
-			{/* 
+
+
+{/* 
 			<br />
 			<br />
 			<h1 className="container container-title">Planets</h1>
@@ -173,7 +175,7 @@ export const Home = () => {
 					))}
 				</div>
 			</div> */}
-		
+
 
 
 

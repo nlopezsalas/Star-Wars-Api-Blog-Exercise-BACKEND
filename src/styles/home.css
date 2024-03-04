@@ -1,13 +1,22 @@
+
 body {
-    background-color: rgb(40, 39, 39);
-}
+ background: #132430;
+} 
 
 .container-title{
     color: brown;
 }
 
 .card{
-    background-color: rgba(255, 228, 196, 0.381);
+    background-color: rgba(94, 114, 146, 0.999);
+    
+}
+
+.base {
+
+  background-repeat: no-repeat;
+  background-size: auto;
+
 }
 
 .card-title {
@@ -15,6 +24,9 @@ body {
     border-top: 1px solid #000; 
      border-bottom: 1px solid #000;
     padding: 10px; 
+    font-size: x-large;
+    color: #030f30;
+    text-shadow: 1px 4px 5px #bba9b7;
 }
 
 .container-cards {
@@ -24,6 +36,8 @@ body {
     scrollbar-width: thin; 
     scrollbar-color: #ccc #f4f4f4; 
     padding-bottom: 15px;
+  
+
   }
   
   .container-cards::-webkit-scrollbar {
@@ -38,5 +52,25 @@ body {
   .container-cards::-webkit-scrollbar-track {
     background-color: #f4f4f4; 
   }
+
+  .text-gradient {
+    color: transparent;
+    background-image: linear-gradient(to left, #FFD700, #7B68EE, #3498db, #2ecc71, #FFD700);    
+    background-clip: text;
+    animation: color 10s linear infinite;
+    background-size: 500%; 
+    font-size: 4rem;
+       
+}
+
+@keyframes color {
+    from {
+        background-position: 0% 50%;
+    }
+
+    to {
+        background-position: 100% 50%;
+    }
+}
 
   

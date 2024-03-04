@@ -8,20 +8,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 			starships: [],
 			// starshipsDetails: [],
       favorites: [],
+      //
+      counter: 0,
 		},
 
 
 		actions: {    
 
-      addFavorites: (name) =>{
-        setStore({favorites: getStore().favorites.concat(name)})
+      // addFavorites: (name) =>{
+      //   setStore({favorites: getStore().favorites.concat(name)});
+      //   getStore().counter++
+      // },
+
+      // deleteFavorites:(name)=>{
+			// 	setStore({favorites: name});
+			// 	getStore().counter--
+			// },
+
+      addFavorites: (name) => {
+        setStore({
+          favorites: [...getStore().favorites, name],
+          counter: getStore().counter + 1,  // Incrementa el contador
+        });
       },
-
-      // deleteFavorties: () => {
-
-      // }
-			  
-
+      
+      deleteFavorites: (name) => {
+        const currentFavorites = getStore().favorites;
+        const updatedFavorites = currentFavorites.filter((favorite) => favorite !== name);
+      
+        setStore({
+          favorites: updatedFavorites,
+          counter: getStore().counter - 1,  // Decrementa el contador
+        });
+      },
+      
+  
+      
+      
 
 			// getPeople: () => {
 			// 	fetch("https://www.swapi.tech/api/people")

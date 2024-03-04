@@ -20,22 +20,15 @@ export const People = () => {
 		"https://lumiere-a.akamaihd.net/v1/images/r5-d4_main_image_7d5f078e.jpeg?region=374%2C0%2C1186%2C666",
 		"https://lumiere-a.akamaihd.net/v1/images/image_606ff7f7.jpeg?region=0%2C0%2C1560%2C878",
 		"https://lumiere-a.akamaihd.net/v1/images/obi-wan-kenobi-main_3286c63c.jpeg?region=0%2C0%2C1280%2C721",
-    ]
+	]
 
-    // const [selectedId, setSelectedId] = useState(null);
+	useEffect(() => { actions.getPeople() }, [])
 
-	// const selectCharacterById = (store, characterId) => {
-	// 	return store.people.find(item => item.result && item.result.uid === characterId);
-	// };
-
-    useEffect(() => { actions.getPeople() }, [])
-
-
-    return (
+	return (
 
 		<>
 			<br />
-			<h1 className="container container-title">Characters</h1>
+			<h1 className="container container-title text-gradient">Characters</h1>
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
@@ -47,26 +40,39 @@ export const People = () => {
 
 									{store.people[index] && store.people[index].result && store.people[index].result.properties && (
 										<div>
-											<p className="card-text">Height {store.people[index].result.properties.height}</p>
-											<p className="card-text">Mass: {store.people[index].result.properties.mass}</p>
-											<p className="card-text">Gender: {store.people[index].result.properties.gender}</p>
+											<p className="card-text"><b>Height:</b>  {store.people[index].result.properties.height}</p>
+											<p className="card-text"><b>Mass:</b>  {store.people[index].result.properties.mass}</p>
+											<p className="card-text"><b>Gender:</b>  {store.people[index].result.properties.gender}</p>
 										</div>
 									)}
-									<Link to={{ pathname: `/details/${item.result.uid}`}}>
-										<button className="btn btn-primary mt-2">
-											Learn More!
+									<div className="d-flex justify-content-between align-items-center">
+										<Link to={{ pathname: `/details/${item.result.uid}` }}>
+											<button className="btn btn-primary mt-2">
+												Learn More!
+											</button>
+										</Link>
+
+										<button
+											type="button"
+											className={`btn ${store.favorites.includes(item.result.properties.name) ? 'btn-danger' : 'btn-outline-danger'} mt-2`}
+											onClick={() => {const isFavorite = store.favorites.includes(item.result.properties.name)
+												if (isFavorite) {
+													actions.deleteFavorites(item.result.properties.name);
+												} else {
+													actions.addFavorites(item.result.properties.name);
+												}
+											}}>
+											<i className="fas fa-heart" />
 										</button>
-									</Link>
-                                        <button className="boton-heart" onClick={()=> actions.addFavourites(item.result.properties.name)}>
-									        <i className="fas fa-heart" />
-								        </button>
+									</div>
 								</div>
 							</div>
 						</div>
 					))}
 				</div>
 			</div>
-            </>
+		</>
 
 
-)}
+	)
+}
