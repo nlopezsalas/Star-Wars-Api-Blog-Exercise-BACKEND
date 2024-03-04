@@ -24,11 +24,14 @@ export const People = () => {
 
 	useEffect(() => { actions.getPeople() }, [])
 
+	console.log(store.people);
+	
+
 	return (
 
 		<>
 			<br />
-			<h1 className="container container-title text-gradient">Characters</h1>
+			<h1 className="container container-title text-gradient">CHARACTERS</h1>
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
@@ -46,7 +49,7 @@ export const People = () => {
 										</div>
 									)}
 									<div className="d-flex justify-content-between align-items-center">
-										<Link to={{ pathname: `/details/${item.result.uid}` }}>
+										<Link to={{ pathname: `/peopledetails/${item.result.uid}` }}>
 											<button className="btn btn-primary mt-2">
 												Learn More!
 											</button>

@@ -1,186 +1,162 @@
+
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			people: [],
-			// peopleDetails: [],
-			planets: [],
-			// planetsDetails: [],
-			starships: [],
-			// starshipsDetails: [],
-      favorites: [],
-      //
-      counter: 0,
-		},
+
+    return {
+
+        store: {
+            people: [],
+
+            planets: [],
+
+            starships: [],
+
+            favorites: [],
+
+            counter: 0,
+
+        },
 
 
-		actions: {    
+        actions: {
 
-      // addFavorites: (name) =>{
-      //   setStore({favorites: getStore().favorites.concat(name)});
-      //   getStore().counter++
-      // },
+            addFavorites: (name) => {
+                setStore({
+                    favorites: [...getStore().favorites, name],
+                    counter: getStore().counter + 1,
+                });
+            },
 
-      // deleteFavorites:(name)=>{
-			// 	setStore({favorites: name});
-			// 	getStore().counter--
-			// },
 
-      addFavorites: (name) => {
-        setStore({
-          favorites: [...getStore().favorites, name],
-          counter: getStore().counter + 1,  // Incrementa el contador
-        });
-      },
-      
-      deleteFavorites: (name) => {
-        const currentFavorites = getStore().favorites;
-        const updatedFavorites = currentFavorites.filter((favorite) => favorite !== name);
-      
-        setStore({
-          favorites: updatedFavorites,
-          counter: getStore().counter - 1,  // Decrementa el contador
-        });
-      },
-      
-  
-      
-      
+        
+            deleteFavorites: (name) => {
+                const currentFavorites = getStore().favorites;
+                const updatedFavorites = currentFavorites.filter((favorite) => favorite !== name);
+                
+                setStore({
+                    favorites: updatedFavorites,
+                    counter: updatedFavorites.length,
+                });
+            },
+            
 
-			// getPeople: () => {
-			// 	fetch("https://www.swapi.tech/api/people")
-			// 	.then(res => res.json())
-			// 	.then(data => setStore({people: data.results}))
-			// 	.catch(err => console.error(err))
-			// },
 
-      getPeople: async () => {
-        try {
-            // Verifica si la información está en localStorage
-            const storedData = localStorage.getItem("peopleData");
-    
-            if (storedData) {
-                // Si hay información en localStorage, actualiza el estado sin realizar una solicitud de red
-                setStore({ people: JSON.parse(storedData) });
-            } else {
-                // Si no hay información en localStorage, realiza la solicitud de red
-                const fetchPromises = [];
-                for (let index = 1; index <= 10; index++) {
-                    const url = `https://www.swapi.tech/api/people/${index}`;
-                    const fetchPromise = fetch(url)
-                        .then(res => res.json())
-                        .catch(err => console.error(`Error al obtener datos de ${url}: ${err}`));
-    
-                    fetchPromises.push(fetchPromise);
+
+
+            getPeople: async () => {
+                try {
+                    const storedDataPeople = localStorage.getItem("peopleData");
+
+                    if (storedDataPeople) {
+                        setStore({ people: JSON.parse(storedDataPeople) });
+                    } else {
+                        const fetchPromises = [];
+                        for (let index = 1; index <= 10; index++) {
+                            const urlPeople = `https://www.swapi.tech/api/people/${index}`;
+                            const fetchPromise = fetch(urlPeople)
+                                .then(res => res.json())
+                                .catch(err => console.error(`Error to get data from ${urlPeople}: ${err}`));
+
+                            fetchPromises.push(fetchPromise);
+                        }
+
+                        const people = await Promise.all(fetchPromises);
+
+                        setStore({ people });
+
+                        localStorage.setItem("peopleData", JSON.stringify(people));
+                    }
+                } catch (error) {
+                    console.error('Error to get people details:', error);
                 }
-    
-                // Espera a que todas las solicitudes de red se completen
-                const people = await Promise.all(fetchPromises);
-    
-                // Actualiza el estado con los datos obtenidos
-                setStore({ people });
-    
-                // Almacena la información en localStorage para futuras visitas
-                localStorage.setItem("peopleData", JSON.stringify(people));
-            }
-        } catch (error) {
-            console.error('Error al obtener detalles de personas:', error);
+            },
+
+
+
+
+            getPlanets: async () => {
+                try {
+                    const storedDataPlanets = localStorage.getItem("planetsData");
+
+                    if (storedDataPlanets) {
+                        setStore({ planets: JSON.parse(storedDataPlanets) });
+                    } else {
+                        const fetchPromisesPlanets = [];
+                        for (let index = 1; index <= 10; index++) {
+                            const urlPlanets = `https://www.swapi.tech/api/planets/${index}`;
+                            const fetchPromisePlanet = fetch(urlPlanets)
+                                .then(res => res.json())
+                                .catch(err => console.error(`Error getting data from  ${urlPlanets}: ${err}`));
+
+                            fetchPromisesPlanets.push(fetchPromisePlanet);
+                        }
+
+                        const planets = await Promise.all(fetchPromisesPlanets);
+
+                        setStore({ planets });
+
+                        localStorage.setItem("planetsData", JSON.stringify(planets));
+                    }
+                } catch (error) {
+                    console.error('Error getting planets details:', error);
+                }
+            },
+
+
+
+
+            getStarships: async () => {
+                try {
+                    const storedDataStarships = localStorage.getItem("starshipsData");
+
+                    if (storedDataStarships) {
+                        setStore({ starships: JSON.parse(storedDataStarships) });
+
+                    } else {
+                        const fetchPromisesStarships = [];
+                        const maxStarships = 10;
+                        let starshipsDetailsWithPropertiesCount = 0;
+                        let totalStarshipsDetailsChecked = 0;
+
+                        const fetchStarshipDetailsData = async (index) => {
+                            const url = `https://www.swapi.tech/api/starships/${index}`;
+                            try {
+                                const res = await fetch(url);
+                                const data = await res.json();
+
+                                if (data && data.result && data.result.properties) {
+                                    starshipsDetailsWithPropertiesCount++;
+                                    return data;
+                                } else {
+                                    throw new Error('Starship without properties');
+                                }
+                            } catch (error) {
+                                console.error(`Error getting data from ${url}: ${error}`);
+                                return null;
+                            }
+                        };
+
+                        while (starshipsDetailsWithPropertiesCount < maxStarships && totalStarshipsDetailsChecked < maxStarships * 2) {
+                            const starshipDetailsData = await fetchStarshipDetailsData(totalStarshipsDetailsChecked + 1);
+                            if (starshipDetailsData) {
+                                fetchPromisesStarships.push(starshipDetailsData);
+                            }
+                            totalStarshipsDetailsChecked++;
+                        }
+
+                        const starships = await Promise.all(fetchPromisesStarships);
+
+                        setStore({ starships });
+
+                        localStorage.setItem("starshipsData", JSON.stringify(starships));
+                    }
+                } catch (error) {
+                    console.error('Error getting starships details:', error);
+                }
+            },
+
         }
-    },
-    
+    };
 
-			// getPeople: () => {
-      //           const fetchPromises = [];
-      //           for (let index = 1; index <= 10; index++) {
-      //               const url = `https://www.swapi.tech/api/people/${index}`;
-      //               const fetchPromise = fetch(url)
-      //                   .then(res => res.json())
-      //                   .catch(err => console.error(`Error al obtener datos de ${url}: ${err}`));
-
-      //               fetchPromises.push(fetchPromise);
-      //           }
-      //           Promise.all(fetchPromises)
-      //               .then(people => {
-      //                   setStore({ people });
-      //               })
-      //               .catch(err => console.error('Error al obtener detalles de personas:', err));
-      //       },
-
-			
-			// getPlanets: () => {
-			// 	fetch("https://www.swapi.tech/api/planets/")
-			// 	.then(res => res.json())
-			// 	.then(data => setStore({planets: data.results}))
-			// 	.catch(err => console.error(err))
-			// },
-
-
-			// getPlanets: () => { ES ESTE
-      //           const fetchPromisesPlanets = [];
-      //           for (let index = 1; index <= 10; index++) {
-      //               const url = `https://www.swapi.tech/api/planets/${index}`;
-      //               const fetchPromise = fetch(url)
-      //                   .then(res => res.json())
-      //                   .catch(err => console.error(`Error al obtener datos de ${url}: ${err}`));
-
-      //               fetchPromisesPlanets.push(fetchPromise);
-      //           }
-      //           Promise.all(fetchPromisesPlanets)
-      //               .then(planets => {
-      //                   setStore({ planets });
-      //               })
-      //               .catch(err => console.error('Error al obtener detalles de personas:', err));
-      //       },
-
-
-			// getStarships: () => {
-			// 	fetch("https://www.swapi.tech/api/starships/")
-			// 	.then(res => res.json())
-			// 	.then(data => setStore({starships: data.results}))
-			// 	.catch(err => console.error(err))
-			// },
-                    
-
-
-      // getStarships: () => { ES STE
-      //     const fetchPromisesStarshipsDetails = [];
-      //     let starshipsDetailsWithPropertiesCount = 0;
-      //     let totalStarshipsDetailsChecked = 0;
-      //     const maxStarships = 10;
-        
-      //     const fetchStarshipDetailsData = async (index) => {
-      //       const url = `https://www.swapi.tech/api/starships/${index}`;
-      //       try {
-      //         const res = await fetch(url);
-      //         const data = await res.json();
-              
-      //         if (data && data.result && data.result.properties) {
-      //           starshipsDetailsWithPropertiesCount++;
-      //           return data;
-      //         } else {
-      //           throw new Error('Nave sin propiedades');
-      //         }
-      //       } catch (error) {
-      //         console.error(`Error al obtener datos de ${url}: ${error}`);
-      //         return null;
-      //       }
-      //     };
-        
-      //     (async () => {
-      //       for (let index = 1; starshipsDetailsWithPropertiesCount < maxStarships && totalStarshipsDetailsChecked < maxStarships * 2; index++) {
-      //         const starshipDetailsData = await fetchStarshipDetailsData(index);
-      //         if (starshipDetailsData) {
-      //           fetchPromisesStarshipsDetails.push(starshipDetailsData);
-      //         }
-      //         totalStarshipsDetailsChecked++;
-      //       }
-        
-      //       setStore({ starships: fetchPromisesStarshipsDetails });
-      //     })();
-      //   },
-                       		
-		}
-	};
-	
 };
 
 export default getState;

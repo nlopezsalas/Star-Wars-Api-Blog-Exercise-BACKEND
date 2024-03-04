@@ -6,20 +6,18 @@ import { Context } from "../store/appContext";
 export const PeopleDetails = () => {
   const { store, actions } = useContext(Context);
 
-  const params = useParams();
+  let params = useParams();
 
-  const characterId = params.uid;
+  let characterId = params.uid;
 
-  const { uid } = useParams();
+  let { uid } = useParams();
 
-  const selectedCharacter = store.people.find(item => item.result && item.result.uid === characterId);
-
-  const [localPeople, setLocalPeople] = useState([""]);
+  let selectedCharacter = store.people.find(item => item.result && item.result.uid === characterId);
 
 
-  const imagePeopleUrls = [
-    "https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_7ffe21c7.jpeg?region=130%2C147%2C1417%2C796",
-    "https://lumiere-a.akamaihd.net/v1/images/c-3po-main_d6850e28.jpeg?region=176%2C0%2C951%2C536",
+  let imagePeopleUrls = [
+    "https://lumiere-a.akamaihd.net/v1/images/luke-skywalkers-lightsaber-main-b_b94c2eb9.jpeg?region=0%2C0%2C1280%2C720",
+    "https://lumiere-a.akamaihd.net/v1/images/6023eab8d941ed00018d113f-image_6f532508.jpeg?region=0%2C48%2C1536%2C768",
     "https://lumiere-a.akamaihd.net/v1/images/r2-d2-main_f315b094.jpeg?region=273%2C0%2C951%2C536",
     "https://lumiere-a.akamaihd.net/v1/images/darth-vader-main_4560aff7.jpeg?region=0%2C67%2C1280%2C720",
     "https://lumiere-a.akamaihd.net/v1/images/leia-organa-main_9af6ff81.jpeg?region=187%2C157%2C1400%2C786",
@@ -29,34 +27,6 @@ export const PeopleDetails = () => {
     "https://lumiere-a.akamaihd.net/v1/images/image_606ff7f7.jpeg?region=0%2C0%2C1560%2C878",
     "https://lumiere-a.akamaihd.net/v1/images/obi-wan-kenobi-main_3286c63c.jpeg?region=0%2C0%2C1280%2C721",
   ]
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Check if data is in localStorage
-        const storedData = localStorage.getItem("peopleData");
-
-        if (storedData) {
-          // If data is available, use it directly from localStorage
-          setLocalPeople(JSON.parse(storedData));
-        } else {
-          // If not, make the network request
-          const fetchedData = await actions.getPeople();
-
-          // Store the data in localStorage for future use
-          localStorage.setItem("peopleData", JSON.stringify(fetchedData));
-          setLocalPeople(fetchedData);
-        }
-      } catch (error) {
-        console.error('Error fetching or storing data:', error);
-      }
-    };
-
-    fetchData();
-  }, [actions.getPeople]);
-
-
 
   if (!selectedCharacter) {
     return (
@@ -73,10 +43,6 @@ export const PeopleDetails = () => {
   console.log("store.people:", store.people);
   console.log("characterId:", characterId);
   console.log("Selected Character:", selectedCharacter);
-  console.log("characterId:", characterId)
-  console.log("store.people:", store.people);
-  console.log("characterId:", characterId);
-
 
 
   return (

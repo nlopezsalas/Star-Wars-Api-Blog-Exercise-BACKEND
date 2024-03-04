@@ -60,6 +60,8 @@ body {
     animation: color 10s linear infinite;
     background-size: 500%; 
     font-size: 4rem;
+    display: flex;
+    justify-content: center;
        
 }
 
