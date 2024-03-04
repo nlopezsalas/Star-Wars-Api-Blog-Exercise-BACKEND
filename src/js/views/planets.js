@@ -30,7 +30,7 @@ export const Planets = () => {
 
 		<>
 			<br />
-			<h1 className="container container-title text-gradient">PLANETS</h1>
+			<h1 className="container container-title text-gradient mt-5"> P L A N E T S </h1>
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.planets.map((item, index) => (
@@ -49,7 +49,7 @@ export const Planets = () => {
 									)}
 									<div className="d-flex justify-content-between align-items-center">
 										<Link to={{ pathname: `/planetsdetails/${item.result.uid}` }}>
-											<button className="btn btn-primary mt-2">
+											<button className="btn btn-secondary mt-2">
 												Learn More!
 											</button>
 										</Link>

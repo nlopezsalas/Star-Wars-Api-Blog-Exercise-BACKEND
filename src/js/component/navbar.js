@@ -25,14 +25,14 @@ export const Navbar = () => {
 
 
 	return (
-		<nav className="navbar navbar-light container bg-opacity-100 .bg-dark" style={{borderBottom: "1px solid #20201d",}}>
+		<nav className="navbar navbar-light container bg-opacity-100 .bg-dark" style={{ borderBottom: "1px solid #2020207d", }}>
 			<Link to="/">
 				<img src={starwarsicon} className="card-img-top" style={{ width: '10%', height: '10%', marginRight: '10px', filter: "contrast(40%) sepia(1) hue-rotate(20deg) saturate(1000%)", }} alt="starwarsicon" />
 			</Link>
 			<div className="ml-auto">
 				<div className="dropdown">
 					<button
-						className="btn btn-primary dropdown-toggle me-3"
+						className="btn btn-secondary dropdown-toggle me-3"
 						style={{ width: "200px" }}
 						type="button"
 						id="Button1"
@@ -41,14 +41,14 @@ export const Navbar = () => {
 					</button>
 
 					<ul className={`dropy dropdown-menu${isDropdownOpen ? ' show' : ''}`}
-						aria-labelledby="dropdownMenuButton1">		
+						aria-labelledby="dropdownMenuButton1">
 						{store.favorites.map((item, index) => (
 
 							<li className="text-dark d-flex justify-content-between"
 								key={index}>{item}<span className="bean">
 
-								<i className="fas fa-trash" onClick={() =>
-								actions.deleteFavorites(item)} ></i></span>
+									<i className="fas fa-trash" onClick={() =>
+										actions.deleteFavorites(item)} ></i></span>
 
 							</li>
 						))}

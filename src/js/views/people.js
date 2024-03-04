@@ -25,13 +25,13 @@ export const People = () => {
 	useEffect(() => { actions.getPeople() }, [])
 
 	console.log(store.people);
-	
+
 
 	return (
 
 		<>
 			<br />
-			<h1 className="container container-title text-gradient">CHARACTERS</h1>
+			<h1 className="container container-title text-gradient"> C H A R A C T E R S </h1>
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
@@ -50,7 +50,7 @@ export const People = () => {
 									)}
 									<div className="d-flex justify-content-between align-items-center">
 										<Link to={{ pathname: `/peopledetails/${item.result.uid}` }}>
-											<button className="btn btn-primary mt-2">
+											<button className="btn btn-secondary mt-2">
 												Learn More!
 											</button>
 										</Link>
@@ -58,7 +58,8 @@ export const People = () => {
 										<button
 											type="button"
 											className={`btn ${store.favorites.includes(item.result.properties.name) ? 'btn-danger' : 'btn-outline-danger'} mt-2`}
-											onClick={() => {const isFavorite = store.favorites.includes(item.result.properties.name)
+											onClick={() => {
+												const isFavorite = store.favorites.includes(item.result.properties.name)
 												if (isFavorite) {
 													actions.deleteFavorites(item.result.properties.name);
 												} else {

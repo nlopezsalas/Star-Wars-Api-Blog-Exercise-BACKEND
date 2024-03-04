@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/star-wars');
+
 body {
  background: #132430;
  background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
@@ -8,10 +10,11 @@ body {
 }
 
 .card{
-    /* background-color: rgba(94, 114, 146, 0.999);  */
-    background-image: linear-gradient(to left, #615302, #5339ec, #10639a, #115c30, #645816);
-    animation: color 20s ease-in-out infinite;
-    background-size: 500%; 
+    background-image: 
+    linear-gradient(to right, #615302, #645816, #b3a31699, #615302),
+    linear-gradient(to right, #615302, #645816, #b3a31699, #615302);
+    background-size: 200% 100%; 
+    animation: moveBackground 20s linear infinite;
 
 
 }
@@ -23,8 +26,8 @@ body {
 
 .card-title {
 
-    border-top: 1px solid #000; 
-    border-bottom: 1px solid #000;
+    border-top: 1px solid #2020207d; 
+    border-bottom: 1px solid #2020207d;
     padding: 10px; 
     font-size: x-large;
     color: #030f30;
@@ -57,17 +60,25 @@ body {
 
 .text-gradient {
     color: transparent;
-    background-image: linear-gradient(to left, #FFD700, #7B68EE, #3498db, #2ecc71, #FFD700);    
+    background-image: linear-gradient(to left, #FFE81F, #26223d, #FFE81F, #2e70cc, #FFD700);    
     background-clip: text;
     animation: color 10s linear infinite;
     background-size: 500%; 
     font-size: 4rem;
     display: flex;
     justify-content: center;
-    font-family: "Star Jedi V2";
-    font-weight:bold;
+    font-family: 'Star Wars', sans-serif;
+    letter-spacing: 8px;
+    -webkit-text-stroke-width: 0px;
+    -webkit-text-stroke-color: #0a0a0a;
        
   }
+
+  .btn-secondary {
+    color: #eaebe8;
+    background-color: #7c878f;
+    border-color: #b9b9b9;
+}
 
 @keyframes color {
     from {
@@ -76,6 +87,15 @@ body {
 
     to {
         background-position: 100% 50%;
+    }
+  }
+
+@keyframes moveBackground {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 200% 0; 
     }
   }
 
