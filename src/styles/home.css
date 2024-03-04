@@ -1,6 +1,6 @@
-
 body {
  background: #132430;
+ background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
 } 
 
 .container-title{
@@ -8,25 +8,28 @@ body {
 }
 
 .card{
-    background-color: rgba(94, 114, 146, 0.999);
-    
+    /* background-color: rgba(94, 114, 146, 0.999);  */
+    background-image: linear-gradient(to left, #615302, #5339ec, #10639a, #115c30, #645816);
+    animation: color 20s ease-in-out infinite;
+    background-size: 500%; 
+
+
 }
 
 .base {
-
   background-repeat: no-repeat;
   background-size: auto;
-
 }
 
 .card-title {
 
     border-top: 1px solid #000; 
-     border-bottom: 1px solid #000;
+    border-bottom: 1px solid #000;
     padding: 10px; 
     font-size: x-large;
     color: #030f30;
     text-shadow: 1px 4px 5px #bba9b7;
+    font-weight:bold;
 }
 
 .container-cards {
@@ -36,24 +39,23 @@ body {
     scrollbar-width: thin; 
     scrollbar-color: #ccc #f4f4f4; 
     padding-bottom: 15px;
-  
-
+      
   }
   
-  .container-cards::-webkit-scrollbar {
+.container-cards::-webkit-scrollbar {
     width: 10px; 
   }
   
-  .container-cards::-webkit-scrollbar-thumb {
+.container-cards::-webkit-scrollbar-thumb {
     background-color: #ccc; 
     border-radius: 5px; 
   }
   
-  .container-cards::-webkit-scrollbar-track {
+.container-cards::-webkit-scrollbar-track {
     background-color: #f4f4f4; 
   }
 
-  .text-gradient {
+.text-gradient {
     color: transparent;
     background-image: linear-gradient(to left, #FFD700, #7B68EE, #3498db, #2ecc71, #FFD700);    
     background-clip: text;
@@ -62,8 +64,10 @@ body {
     font-size: 4rem;
     display: flex;
     justify-content: center;
+    font-family: "Star Jedi V2";
+    font-weight:bold;
        
-}
+  }
 
 @keyframes color {
     from {
@@ -73,6 +77,6 @@ body {
     to {
         background-position: 100% 50%;
     }
-}
+  }
 
   

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -18,14 +18,14 @@ export const PeopleDetails = () => {
   let imagePeopleUrls = [
     "https://lumiere-a.akamaihd.net/v1/images/luke-skywalkers-lightsaber-main-b_b94c2eb9.jpeg?region=0%2C0%2C1280%2C720",
     "https://lumiere-a.akamaihd.net/v1/images/6023eab8d941ed00018d113f-image_6f532508.jpeg?region=0%2C48%2C1536%2C768",
-    "https://lumiere-a.akamaihd.net/v1/images/r2-d2-main_f315b094.jpeg?region=273%2C0%2C951%2C536",
-    "https://lumiere-a.akamaihd.net/v1/images/darth-vader-main_4560aff7.jpeg?region=0%2C67%2C1280%2C720",
-    "https://lumiere-a.akamaihd.net/v1/images/leia-organa-main_9af6ff81.jpeg?region=187%2C157%2C1400%2C786",
-    "https://lumiere-a.akamaihd.net/v1/images/owen-lars-main_08c717c8.jpeg?region=0%2C34%2C1053%2C593",
+    "https://lumiere-a.akamaihd.net/v1/images/image_88f51c0e.jpeg?region=0%2C0%2C1560%2C878",
+    "https://lumiere-a.akamaihd.net/v1/images/607598d0230e6a00018e21b2-image_354b1b56.jpeg?region=0%2C48%2C1536%2C768",
+    "https://lumiere-a.akamaihd.net/v1/images/5fd39924a15b730001f00158-image_f2f2317f.jpeg?region=0%2C48%2C1536%2C768",
+    "https://lumiere-a.akamaihd.net/v1/images/62dfe88ebde4cd0001df8539-image_5dd365a7.jpeg?region=0%2C48%2C1536%2C768",
     "https://lumiere-a.akamaihd.net/v1/images/beru-lars-main_fa680a4c.png?region=342%2C0%2C938%2C527",
     "https://lumiere-a.akamaihd.net/v1/images/r5-d4_main_image_7d5f078e.jpeg?region=374%2C0%2C1186%2C666",
     "https://lumiere-a.akamaihd.net/v1/images/image_606ff7f7.jpeg?region=0%2C0%2C1560%2C878",
-    "https://lumiere-a.akamaihd.net/v1/images/obi-wan-kenobi-main_3286c63c.jpeg?region=0%2C0%2C1280%2C721",
+    "https://lumiere-a.akamaihd.net/v1/images/62bf0e03e8459d0001f4881b-image_71900d89.jpeg?region=192%2C0%2C1152%2C864",
   ]
 
   if (!selectedCharacter) {
