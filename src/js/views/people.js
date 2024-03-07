@@ -30,7 +30,11 @@ export const People = () => {
 
 		<>
 			<br />
+			<div className="row">
+				<div className="col-md-12 col-sm-1">
 			<h1 className="container container-title text-gradient"> C H A R A C T E R S </h1>
+				</div>
+			</div>
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
