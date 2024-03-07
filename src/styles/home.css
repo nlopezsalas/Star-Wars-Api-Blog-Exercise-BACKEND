@@ -84,6 +84,16 @@ body {
     border-color: #b9b9b9;
 }
 
+.img-starwars {
+    position: relative;
+    z-index: 2;
+}
+
+.dropdown {
+    position: relative;
+    z-index: 1;
+}
+
 @keyframes color {
     from {
         background-position: 0% 50%;

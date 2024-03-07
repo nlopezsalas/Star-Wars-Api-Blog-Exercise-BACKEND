@@ -34,7 +34,7 @@ export const People = () => {
 			<div className="container mt-5 container-cards">
 				<div className="d-flex flex-nowrap">
 					{store.people.map((item, index) => (
-						<div key={index} className="col-md-4 me-3">
+						<div key={index} className="col-md-4 col-sm-1 me-3">
 							<div className="card">
 								<img src={imagePeopleUrls[index % imagePeopleUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="Images of characters" />
 								<div className="card-body">
