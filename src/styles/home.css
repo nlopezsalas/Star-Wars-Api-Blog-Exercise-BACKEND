@@ -78,10 +78,21 @@ body {
        
 }
 
-.btn-secondary {
-    color: #eaebe8;
-    background-color: #7c878f;
-    border-color: #b9b9b9;
+@media (max-width: 768px) {
+    .btn-secondary {
+      width: 20px;
+      color: #eaebe8;
+      background-color: #7c878f;
+      border-color: #b9b9b9;
+  }
+}
+
+@media (max-width: 768px) {
+    .img-starwars {
+      width: 60px;
+      height: 60px;
+
+  }
 }
 
 .img-starwars {
@@ -91,7 +102,7 @@ body {
 
 .dropdown {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 @keyframes color {

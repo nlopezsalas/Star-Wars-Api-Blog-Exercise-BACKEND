@@ -8,7 +8,7 @@ export const Lightsaber = () => {
 
     return (
 
-    <div className="lightsaber">
+    <div className="lightsaber container d-flex justify-content-start">
         <div className="hilt">
             <div className="button-lightsaber"></div>
             <div className="button-lightsaber"></div>
