@@ -5,6 +5,17 @@ body {
   background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
 } 
 
+@media (min-width: 1200px) {
+  span.container-title {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 728px) {
+  span.container-title {
+    font-size: 15px;
+  }
+}
 
 .container-title{
     color: brown;
@@ -37,28 +48,15 @@ body {
 }
 
 
-.container-cards {
-    overflow-x: auto; 
-    overflow-y: hidden;
-    max-height: auto; 
-    scrollbar-width: thin; 
-    scrollbar-color: #ccc #f4f4f4; 
-    padding-bottom: 15px;  
+.overflow-auto {
+  overflow-x: scroll;
+  white-space: nowrap;
+  scrollbar-width: thin; 
+ 
 }
 
-
-.container-cards::-webkit-scrollbar {
-    width: 10px; 
-}
-
-
-.container-cards::-webkit-scrollbar-thumb {
-    background-color: #ccc; 
-    border-radius: 5px; 
-}
-  
-.container-cards::-webkit-scrollbar-track {
-    background-color: #f4f4f4; 
+.overflow-auto::-webkit-scrollbar {
+  width: 10px; 
 }
 
 
@@ -78,14 +76,6 @@ body {
        
 }
 
-@media (max-width: 768px) {
-    .btn-secondary {
-      width: 20px;
-      color: #eaebe8;
-      background-color: #7c878f;
-      border-color: #b9b9b9;
-  }
-}
 
 @media (max-width: 768px) {
     .img-starwars {

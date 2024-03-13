@@ -24,57 +24,65 @@ export const Planets = () => {
 
 	useEffect(() => { actions.getPlanets() }, [])
 
-    console.log(store.planets);
+	console.log(store.planets);
 
 	return (
 
 		<>
+
 			<br />
-			<h1 className="container container-title text-gradient mt-5"> P L A N E T S </h1>
-			<div className="container mt-5 container-cards">
-				<div className="d-flex flex-nowrap">
-					{store.planets.map((item, index) => (
-						<div key={index} className="col-md-4 me-3">
-							<div className="card">
-								<img src={imagePlanetsUrls[index % imagePlanetsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="Images of characters" />
-								<div className="card-body">
-									<h5 className="card-title">{item.result.properties.name}</h5>
+			<div className="container mt-5">
+				<div className="row">
+					<div className="col-12">
+						<span className="container-title text-gradient text-center mt-5"> P L A N E T S </span>
+					</div>
+				</div>
 
-									{store.planets[index] && store.planets[index].result && store.planets[index].result.properties && (
-										<div>
-											<p className="card-text"><b>Climate:</b>  {store.planets[index].result.properties.climate}</p>
-											<p className="card-text"><b>Diameter:</b>  {store.planets[index].result.properties.diameter}</p>
-											<p className="card-text"><b>Terrain:</b>  {store.planets[index].result.properties.terrain}</p>
-										</div>
-									)}
-									<div className="d-flex justify-content-between align-items-center">
-										<Link to={{ pathname: `/planetsdetails/${item.result.uid}` }}>
-											<button className="btn btn-secondary mt-2">
-												Learn More!
+				<div className="row overflow-auto">
+					<div className="col-12 d-flex flex-row flex-nowrap gap-3" style={{ width: `${store.planets.length * 100}%`, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+						{store.planets.map((item, index) => (
+							<div key={index} className="col-md-4 col-sm-6 col-12 mb-3">
+								<div className="card">
+									<img src={imagePlanetsUrls[index % imagePlanetsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="Images of characters" />
+									<div className="card-body">
+										<h5 className="card-title">{item.result.properties.name}</h5>
+
+										{store.planets[index] && store.planets[index].result && store.planets[index].result.properties && (
+											<div>
+												<p className="card-text"><b>Climate:</b> {store.planets[index].result.properties.climate}</p>
+												<p className="card-text"><b>Diameter:</b> {store.planets[index].result.properties.diameter}</p>
+												<p className="card-text"><b>Terrain:</b> {store.planets[index].result.properties.terrain}</p>
+											</div>
+										)}
+
+										<div className="d-flex justify-content-between align-items-center">
+											<Link to={{ pathname: `/planetsdetails/${item.result.uid}` }}>
+												<button className="btn btn-secondary mt-2">
+													Learn More!
+												</button>
+											</Link>
+
+											<button
+												type="button"
+												className={`btn ${store.favorites.includes(item.result.properties.name) ? 'btn-danger' : 'btn-outline-danger'} mt-2`}
+												onClick={() => {
+													const isFavorite = store.favorites.includes(item.result.properties.name);
+													if (isFavorite) {
+														actions.deleteFavorites(item.result.properties.name);
+													} else {
+														actions.addFavorites(item.result.properties.name);
+													}
+												}}>
+												<i className="fas fa-heart" />
 											</button>
-										</Link>
-
-										<button
-											type="button"
-											className={`btn ${store.favorites.includes(item.result.properties.name) ? 'btn-danger' : 'btn-outline-danger'} mt-2`}
-											onClick={() => {const isFavorite = store.favorites.includes(item.result.properties.name)
-												if (isFavorite) {
-													actions.deleteFavorites(item.result.properties.name);
-												} else {
-													actions.addFavorites(item.result.properties.name);
-												}
-											}}>
-											<i className="fas fa-heart" />
-										</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
 		</>
-
-
 	)
 }

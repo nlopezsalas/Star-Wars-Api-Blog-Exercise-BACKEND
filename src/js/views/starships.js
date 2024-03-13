@@ -24,53 +24,62 @@ export const Starships = () => {
 
 	useEffect(() => { actions.getStarships() }, [])
 
-    console.log(store.starships);
+	console.log(store.starships);
 
 	return (
 
 		<>
 			<br />
-			<h1 className="container container-title text-gradient mt-5"> S T A R S H i P S </h1>
-			<div className="container mt-5 container-cards">
-				<div className="d-flex flex-nowrap">
-					{store.starships.map((item, index) => (
-						<div key={index} className="col-md-4 me-3">
-							<div className="card">
-								<img src={imageStarshipsUrls[index % imageStarshipsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="Images of characters" />
-								<div className="card-body">
-									<h5 className="card-title">{item.result.properties.name}</h5>
+			<div className="container mt-5">
+				<div className="row">
+					<div className="col-12">
+						<span className="container-title text-gradient text-center mt-5"> S T A R S H i P S </span>
+					</div>
+				</div>
 
-									{store.starships[index] && store.starships[index].result && store.starships[index].result.properties && (
-										<div>
-											<p className="card-text"><b>Cost: </b> {store.starships[index].result.properties.cost_in_credits}</p>
-											<p className="card-text"><b>Length: </b> {store.starships[index].result.properties.length}</p>
-											<p className="card-text"><b>Passengers: </b> {store.starships[index].result.properties.passengers}</p>
-										</div>
-									)}
-									<div className="d-flex justify-content-between align-items-center">
-										<Link to={{ pathname: `/starshipsdetails/${item.result.uid}` }}>
-											<button className="btn btn-secondary mt-2">
-												Learn More!
+				<div className="row overflow-auto">
+					<div className="col-12 d-flex flex-row gap-3" style={{ width: `${store.starships.length * 100}%` }}>
+						{store.starships.map((item, index) => (
+							<div key={index} className="col-md-4 col-sm-6 col-12 mb-3">
+								<div className="card">
+									<img src={imageStarshipsUrls[index % imageStarshipsUrls.length]} style={{ objectFit: "contain" }} className="card-img-top" alt="Images of characters" />
+									<div className="card-body">
+										<h5 className="card-title">{item.result.properties.name}</h5>
+
+										{store.starships[index] && store.starships[index].result && store.starships[index].result.properties && (
+											<div>
+												<p className="card-text"><b>Cost:</b> {store.starships[index].result.properties.cost_in_credits}</p>
+												<p className="card-text"><b>Length:</b> {store.starships[index].result.properties.length}</p>
+												<p className="card-text"><b>Passengers:</b> {store.starships[index].result.properties.passengers}</p>
+											</div>
+										)}
+
+										<div className="d-flex justify-content-between align-items-center">
+											<Link to={{ pathname: `/starshipsdetails/${item.result.uid}` }}>
+												<button className="btn btn-secondary mt-2">
+													Learn More!
+												</button>
+											</Link>
+
+											<button
+												type="button"
+												className={`btn ${store.favorites.includes(item.result.properties.name) ? 'btn-danger' : 'btn-outline-danger'} mt-2`}
+												onClick={() => {
+													const isFavorite = store.favorites.includes(item.result.properties.name);
+													if (isFavorite) {
+														actions.deleteFavorites(item.result.properties.name);
+													} else {
+														actions.addFavorites(item.result.properties.name);
+													}
+												}}>
+												<i className="fas fa-heart" />
 											</button>
-										</Link>
-
-										<button
-											type="button"
-											className={`btn ${store.favorites.includes(item.result.properties.name) ? 'btn-danger' : 'btn-outline-danger'} mt-2`}
-											onClick={() => {const isFavorite = store.favorites.includes(item.result.properties.name)
-												if (isFavorite) {
-													actions.deleteFavorites(item.result.properties.name);
-												} else {
-													actions.addFavorites(item.result.properties.name);
-												}
-											}}>
-											<i className="fas fa-heart" />
-										</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
 		</>

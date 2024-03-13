@@ -27,51 +27,106 @@ export const Navbar = () => {
 
 	return (
 
-		<div className="navbar-div">
-			<nav className="navbar navbar-light container" style={{ borderBottom: "1px solid #2020207d" }}>
-				<div className="container-fluid">
-					<div className="row align-items-center">
-						<div className="col-md-2 col-2">
-							<Link to="/">
-								<img
-									src={starwarsicon}
-									className="card-img-top img-fluid" style={{ filter: "contrast(40%) sepia(1) hue-rotate(20deg) saturate(1000%)" }}
-									alt="starwarsicon"
-								/>
-							</Link>
-						</div>
+		<nav className="navbar navbar-light container" style={{ borderBottom: "1px solid #2020207d" }}>
+			<div className="container-fluid">
+				<div className="row align-items-center">
+					<div className="col-md-2 col-2">
+						<Link to="/">
+							<img
+								src={starwarsicon}
+								className="card-img-top img-fluid"
+								style={{ filter: "contrast(40%) sepia(1) hue-rotate(20deg) saturate(1000%)" }}
+								alt="starwarsicon"
+							/>
+						</Link>
+					</div>
 
-						<div className="col-md-8 col-8 img-fluid lightsaber-container" style={{ marginLeft: '0', paddingLeft: '0px' }}>
-							<Lightsaber />
-						</div>
+					<div className="col-md-8 col-8 img-fluid lightsaber-container" style={{ marginLeft: '0', paddingLeft: '0px' }}>
+						<Lightsaber />
+					</div>
 
-						<div className="col-md-2 col-2 d-flex justify-content-end">
-							<div className="dropdown">
-								<button
-									className="btn btn-secondary dropdown-toggle me-3"
-									style={{ width: "110px" }}
-									type="button"
-									id="Button1"
-									onClick={handleToggleDropdown}>
-									Favorites <span className="counter">{store.counter}</span>
-								</button>
+					<div className="col-md-2 col-12 d-flex justify-content-end">
+						<div className="dropdown">
+							<button
+								className="btn btn-secondary dropdown-toggle me-3 d-none d-md-block"
+								type="button"
+								id="Button1"
+								onClick={handleToggleDropdown}
+							>
+								Favorites <span className="counter">{store.counter}</span>
+							</button>
 
-								<ul className={`dropy dropdown-menu${isDropdownOpen ? ' show' : ''}`} aria-labelledby="dropdownMenuButton1">
-									{store.favorites.map((item, index) => (
-										<li className="text-dark d-flex justify-content-between" key={index}>
-											{item}
-											<span className="bean">
-												<i className="fas fa-trash" onClick={() => actions.deleteFavorites(item)}></i>
-											</span>
-										</li>
-									))}
-								</ul>
-							</div>
+							<button
+								className="btn btn-secondary dropdown-toggle me-3 d-block d-md-none"
+								type="button"
+								id="Button1"
+								onClick={handleToggleDropdown}
+								style={{ fontSize: "0.8rem", }}
+							>
+								<span className="counter">Favorites {store.counter}</span>
+							</button>
+
+							<ul className={`dropy dropdown-menu${isDropdownOpen ? ' show' : ''}`} aria-labelledby="dropdownMenuButton1">
+								{store.favorites.map((item, index) => (
+									<li className="text-dark d-flex justify-content-between" key={index}>
+										{item}
+										<span className="bean">
+											<i className="fas fa-trash" onClick={() => actions.deleteFavorites(item)}></i>
+										</span>
+									</li>
+								))}
+							</ul>
 						</div>
 					</div>
 				</div>
-			</nav>
-		</div>
+			</div>
+		</nav>
+
+
+
+		// <nav className="navbar navbar-light container" style={{ borderBottom: "1px solid #2020207d" }}>
+		// 	<div className="container-fluid">
+		// 		<div className="row align-items-center">
+		// 			<div className="col-md-2 col-2">
+		// 				<Link to="/">
+		// 					<img
+		// 						src={starwarsicon}
+		// 						className="card-img-top img-fluid" style={{ filter: "contrast(40%) sepia(1) hue-rotate(20deg) saturate(1000%)" }}
+		// 						alt="starwarsicon"
+		// 					/>
+		// 				</Link>
+		// 			</div>
+
+		// 			<div className="col-md-8 col-8 img-fluid lightsaber-container" style={{ marginLeft: '0', paddingLeft: '0px' }}>
+		// 				<Lightsaber />
+		// 			</div>
+
+		// 			<div className="col-md-2 col-2 d-flex justify-content-end">
+		// 				<div className="dropdown">
+		// 					<button
+		// 						className="btn btn-secondary dropdown-toggle me-3"
+		// 						type="button"
+		// 						id="Button1"
+		// 						onClick={handleToggleDropdown}>
+		// 						Favorites <span className="counter">{store.counter}</span>
+		// 					</button>
+
+		// 					<ul className={`dropy dropdown-menu${isDropdownOpen ? ' show' : ''}`} aria-labelledby="dropdownMenuButton1">
+		// 						{store.favorites.map((item, index) => (
+		// 							<li className="text-dark d-flex justify-content-between" key={index}>
+		// 								{item}
+		// 								<span className="bean">
+		// 									<i className="fas fa-trash" onClick={() => actions.deleteFavorites(item)}></i>
+		// 								</span>
+		// 							</li>
+		// 						))}
+		// 					</ul>
+		// 				</div>
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </nav>
+
 	);
 };
 

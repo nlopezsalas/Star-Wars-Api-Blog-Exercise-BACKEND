@@ -2,8 +2,8 @@
   .lightsaber-container {
     position: relative;
     display: inline-flex;
-    transform: scale(0.3);
-    width: 100px;
+    transform: scale(0.35);
+    width: 50px;
     margin-right: 100px;
     margin-left: -4rem;
   }
