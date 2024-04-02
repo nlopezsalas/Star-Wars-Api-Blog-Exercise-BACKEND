@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
+import { Login } from "./views/login";
+
 import { PeopleDetails } from "./views/peopledetails";
 import { PlanetsDetails } from "./views/planetsdetails";
-import { StarshipsDetails} from "./views/starshipsdetails";
+import { StarshipsDetails } from "./views/starshipsdetails";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -28,6 +30,7 @@ const Layout = () => {
 						<Route path="/peopledetails/:uid" element={<PeopleDetails />} />
 						<Route path="/planetsdetails/:uid" element={<PlanetsDetails />} />
 						<Route path="/starshipsdetails/:uid" element={<StarshipsDetails />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />

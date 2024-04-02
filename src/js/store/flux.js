@@ -18,6 +18,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
         actions: {
+            getFavorites: async() => {
+                try {
+                    const response = await fetch('',{
+                        
+                    })
+
+                }
+                catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
+
+            login: async(email, password) => {
+                try {
+                    const response = await fetch('https://urban-space-funicular-xq576v9pv7cv9j-3000.app.github.dev/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/json'
+                        },
+                        body: JSON.stringify({
+                            "email": email,
+                            "password": password
+                        }) 
+                    })
+                    console.log(response);
+                    if (response.status !== 200) {
+                    // if (!response.ok) {
+                        console.log("Error en la petición: ", response.status);
+                        return false;
+                    }
+
+		            const data = await response.json();
+                    localStorage.setItem("token", data.access_token);
+		            console.log(data);
+                    return true;
+
+                }
+                catch (error) {
+                    console.log(error);
+                    return false;
+                }
+
+            },
 
             addFavorites: (name) => {
                 setStore({

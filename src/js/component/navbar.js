@@ -55,6 +55,10 @@ export const Navbar = () => {
 							>
 								Favorites <span className="counter">{store.counter}</span>
 							</button>
+							
+							<Link to={{ pathname: `/login` }}>
+								Login
+							</Link>
 
 							<button
 								className="btn btn-secondary dropdown-toggle me-3 d-block d-md-none"
@@ -65,6 +69,7 @@ export const Navbar = () => {
 							>
 								<span className="counter">Favorites {store.counter}</span>
 							</button>
+
 
 							<ul className={`dropy dropdown-menu${isDropdownOpen ? ' show' : ''}`} aria-labelledby="dropdownMenuButton1">
 								{store.favorites.map((item, index) => (
