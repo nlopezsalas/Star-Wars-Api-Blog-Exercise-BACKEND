@@ -14,14 +14,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             counter: 0,
 
+            auth: false
+
         },
 
 
         actions: {
-            getFavorites: async() => {
+            getFavorites: async () => {
                 try {
-                    const response = await fetch('',{
-                        
+                    const response = await fetch('', {
+
                     })
 
                 }
@@ -31,28 +33,28 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            login: async(email, password) => {
+            login: async (email, password) => {
                 try {
                     const response = await fetch('https://urban-space-funicular-xq576v9pv7cv9j-3000.app.github.dev/login', {
                         method: 'POST',
                         headers: {
-                            'Content-Type':'application/json'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
                             "email": email,
                             "password": password
-                        }) 
+                        })
                     })
                     console.log(response);
                     if (response.status !== 200) {
-                    // if (!response.ok) {
-                        console.log("Error en la petición: ", response.status);
+                        // if (!response.ok) {
+                        console.log("Error en la login: ", response.status);
                         return false;
                     }
 
-		            const data = await response.json();
+                    const data = await response.json();
                     localStorage.setItem("token", data.access_token);
-		            console.log(data);
+                    console.log(data);
                     return true;
 
                 }
@@ -63,6 +65,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             },
 
+            validToken: async () => {
+                let token = localStorage.getItem('token');
+                if (!token) {
+                    console.log("No se encontró token en localStorage");
+                    setStore({ auth: false });
+                    return; // Salir temprano si no hay token
+                }
+                
+                try {
+                    let response = await fetch('https://urban-space-funicular-xq576v9pv7cv9j-3000.app.github.dev/validate-token/', {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        }
+                    });
+            
+                    if (!response.ok) {
+                        // Si el estado de la respuesta no es exitoso, manejar según el código específico
+                        if (response.status == 401) {
+                            localStorage.removeItem("token");
+                            console.log("Sesión no autorizada o token inválido");
+                            setStore({ auth: false });
+                        } else {
+                            console.log("Error en la validación con estado: ", response.status);
+                        }
+                        return; // Retorna para evitar lecturas adicionales de la respuesta
+                    }
+            
+                    const data = await response.json();
+                    console.log("Validación exitosa, datos recibidos:", data);
+                    setStore({ auth: data.is_logged });
+                    return data; // Retorna los datos en caso de éxito
+                } catch (error) {
+                    console.log("Error de red o al realizar la petición:", error);
+                    setStore({ auth: false }); // Considerar no autenticado en caso de error
+                }
+            },            
+
             addFavorites: (name) => {
                 setStore({
                     favorites: [...getStore().favorites, name],
@@ -70,21 +111,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 });
             },
 
-
-        
             deleteFavorites: (name) => {
                 const currentFavorites = getStore().favorites;
                 const updatedFavorites = currentFavorites.filter((favorite) => favorite !== name);
-                
+
                 setStore({
                     favorites: updatedFavorites,
                     counter: updatedFavorites.length,
                 });
             },
-            
-
-
-
 
             getPeople: async () => {
                 try {
@@ -113,9 +148,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error to get people details:', error);
                 }
             },
-
-
-
 
             getPlanets: async () => {
                 try {
