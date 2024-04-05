@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
@@ -19,9 +20,6 @@ export const Login = () => {
 	const [password, setPassword] = useState("")
 	const { store, actions } = useContext(Context);
 	const Navigate = useNavigate("")
-
-	console.log(password);
-
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -36,14 +34,12 @@ export const Login = () => {
 	useEffect(() => { }
 		, [])
 
-
-
-
 	return (
 		<div className="base container-fluid pt-5 pb-5" >
 			<Row>
 				<Col></Col>
 				<Col className="bg-black">
+					<h1 className="text-white">Login</h1>
 					<Form onSubmit={handleSubmit}>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label className="text-primary">Email address</Form.Label>
@@ -62,7 +58,14 @@ export const Login = () => {
 						<Button variant="primary" type="submit" >
 							Submit
 						</Button>
-					</Form></Col>
+						<Row>
+							<Link to={{ pathname: `/signup` }}>
+								No tengo cuenta, quiero crear una
+							</Link>
+						</Row>
+
+					</Form>
+				</Col>
 				<Col></Col>
 			</Row>
 		</div>

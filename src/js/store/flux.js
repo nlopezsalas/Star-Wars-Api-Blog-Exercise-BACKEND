@@ -53,8 +53,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
 
                     const data = await response.json();
-                    localStorage.setItem("token", data.access_token);
-                    console.log(data);
+                    sessionStorage.setItem("token", data.access_token);
+                    setStore({ ...getStore(), auth: true });
                     return true;
 
                 }
@@ -66,13 +66,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             validToken: async () => {
-                let token = localStorage.getItem('token');
+                let token = sessionStorage.getItem('token');
                 if (!token) {
-                    console.log("No se encontró token en localStorage");
-                    setStore({ auth: false });
-                    return; // Salir temprano si no hay token
+                    console.log("No se encontró token en sessionStorage");
+                    setStore({ ...getStore(), auth: false });
+                    return;
                 }
-                
+
                 try {
                     let response = await fetch('https://urban-space-funicular-xq576v9pv7cv9j-3000.app.github.dev/validate-token/', {
                         method: "GET",
@@ -81,28 +81,50 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Authorization": "Bearer " + token
                         }
                     });
-            
                     if (!response.ok) {
-                        // Si el estado de la respuesta no es exitoso, manejar según el código específico
-                        if (response.status == 401) {
-                            localStorage.removeItem("token");
-                            console.log("Sesión no autorizada o token inválido");
-                            setStore({ auth: false });
-                        } else {
-                            console.log("Error en la validación con estado: ", response.status);
-                        }
-                        return; // Retorna para evitar lecturas adicionales de la respuesta
+                        sessionStorage.removeItem("token");
+                        setStore({ ...getStore(), auth: false });
+                        return false;
+                    } else {
+                        const data = await response.json();
+                        console.log("Validación exitosa, datos recibidos:", data);
+                        setStore({ ...getStore(), auth: data.is_logged });
+                        return true;
                     }
-            
-                    const data = await response.json();
-                    console.log("Validación exitosa, datos recibidos:", data);
-                    setStore({ auth: data.is_logged });
-                    return data; // Retorna los datos en caso de éxito
                 } catch (error) {
                     console.log("Error de red o al realizar la petición:", error);
                     setStore({ auth: false }); // Considerar no autenticado en caso de error
                 }
-            },            
+            },  
+            registerUser: async (name, email, password) => {
+                try {
+                    const response = await fetch('https://urban-space-funicular-xq576v9pv7cv9j-3000.app.github.dev/signup/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    });
+
+                    if (response.status !== 200) {
+                        console.log('Register failed:', response.statusText);
+                        return { success: false, msg: data.msg };
+                    }
+
+                    const data = await response.json();
+
+                    console.log("********" + data.msg);
+                    return { success: true, msg: data.msg };
+
+                } catch (error) {
+                    console.error('Error during login:', error);
+                    return { success: false, msg: data.msg };
+                }
+            },
 
             addFavorites: (name) => {
                 setStore({

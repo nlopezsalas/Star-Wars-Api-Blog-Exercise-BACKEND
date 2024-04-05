@@ -47,28 +47,34 @@ export const Navbar = () => {
 
 					<div className="col-md-2 col-12 d-flex justify-content-end">
 						<div className="dropdown">
-							<button
-								className="btn btn-secondary dropdown-toggle me-3 d-none d-md-block"
-								type="button"
-								id="Button1"
-								onClick={handleToggleDropdown}
-							>
-								Favorites <span className="counter">{store.counter}</span>
-							</button>
-							
-							<Link to={{ pathname: `/login` }}>
-								Login
-							</Link>
+							{store.auth && (
+								<button
+									className="btn btn-secondary dropdown-toggle me-3 d-none d-md-block"
+									type="button"
+									id="Button1"
+									onClick={handleToggleDropdown}
+								>
+									Favorites <span className="counter">{store.counter}</span>
+								</button>
+							)}
+							{!store.auth && (
+								<Link className="btn btn-primary" to={{ pathname: `/login` }}>
+									Login
+								</Link>
+							)}
 
-							<button
-								className="btn btn-secondary dropdown-toggle me-3 d-block d-md-none"
-								type="button"
-								id="Button1"
-								onClick={handleToggleDropdown}
-								style={{ fontSize: "0.8rem", }}
-							>
-								<span className="counter">Favorites {store.counter}</span>
-							</button>
+							{store.auth && (
+								<button
+									className="btn btn-secondary dropdown-toggle me-3 d-block d-md-none"
+									type="button"
+									id="Button1"
+									onClick={handleToggleDropdown}
+									style={{ fontSize: "0.8rem", }}
+								>
+									<span className="counter">Favorites {store.counter}</span>
+								</button>
+							)}
+
 
 
 							<ul className={`dropy dropdown-menu${isDropdownOpen ? ' show' : ''}`} aria-labelledby="dropdownMenuButton1">
