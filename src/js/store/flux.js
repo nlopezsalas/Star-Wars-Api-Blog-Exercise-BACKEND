@@ -199,16 +199,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-
-
-
             getStarships: async () => {
                 try {
                     const storedDataStarships = localStorage.getItem("starshipsData");
-
                     if (storedDataStarships) {
                         setStore({ starships: JSON.parse(storedDataStarships) });
-
                     } else {
                         const fetchPromisesStarships = [];
                         const maxStarships = 10;
@@ -232,7 +227,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 return null;
                             }
                         };
-
                         while (starshipsDetailsWithPropertiesCount < maxStarships && totalStarshipsDetailsChecked < maxStarships * 2) {
                             const starshipDetailsData = await fetchStarshipDetailsData(totalStarshipsDetailsChecked + 1);
                             if (starshipDetailsData) {
